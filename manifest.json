@@ -1,9 +1,8 @@
 {
-    "name": "Getting Started Example",
-    "description": "Build an Extension!",
+    "name": "Accessability Extension",
+    "description": "436 Project",
     "version": "1.0",
     "manifest_version": 3,
-
     "background":
     {
         "service_worker" : "background.js"
