@@ -30,6 +30,31 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
             //     console.log(result.originalbackgroundcolor);
             // })
         });
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: getFontStyle,
+        },
+        (results) => {
+        	console.log(results[0].result);
+            chrome.storage.sync.set({"originalfontStyle": results[0].result});
+        });
+
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: getFontSize,
+        },
+        (results) => {
+            chrome.storage.sync.set({"originalfontsize": results[0].result});
+        });
+
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: getSpacing,
+        },
+        (results) => {
+            chrome.storage.sync.set({"originalspacing": results[0].result});
+            console.log(results[0].result);
+        });
     }
 });
 
@@ -44,4 +69,22 @@ function getPageBackgroundColor() {
         return "#ffffff"
     }
     return backgroundcolor;
+}
+
+//function to save previous font style
+function getFontStyle(){
+	let fontstyle = window.getComputedStyle(document, null).getPropertyValue('font-style');
+    return fontstyle;
+}
+
+//function to save previous font size
+function getFontSize(){
+	let fontsize = window.getComputedStyle(document, null).getPropertyValue('fontSize');
+    return fontsize;
+}
+
+//function to save previous spacing
+function getSpacing(){
+	let spacing = window.getComputedStyle(document, null).getPropertyValue('lineHeight');
+    return spacing;
 }

@@ -46,6 +46,60 @@
             <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
             <label class="form-check-label" for="flexSwitchCheckDefault">Reader Mode</label>
         </div>
+        <div class="dropdown">
+            <button id="changeFont" class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Change Font
+            </button>
+            <ul id="dropdownFont" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li>
+                    <a id="dropdownChangeFontStyle" class="dropdown-item" href="#">Change Font Style</a>
+                </li>
+                <li><a id="dropdownChangeFontSize" class="dropdown-item" href="#">
+                    <form>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="customfontsize" class="col-form-label">Change Font Size</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="customfontsize" size="2">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" id="customfontsizesubmit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                <li><a id="dropdownFontColor" class="dropdown-item" href="#">Change Font Color</a></li>
+                 <li><a id="Spacing" class="dropdown-item" href="#">
+                    <form>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-auto">
+                                <label for="customspacing" class="col-form-label">Change Spacing (eg. 16)</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="text" id="customspacing" size="2">
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" id="customspacingsubmit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </li>
+                <li><a id="dropdownFontReset" class="dropdown-item" href="#">Reset</a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button id="changeFont" class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Font Style
+            </button>
+            <ul id="dropdownFont" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a id="dropdownFontStyleArial" class="dropdown-item" href="#">Arial</a></li>
+                <li><a id="dropdownFontStyleTahoma" class="dropdown-item" href="#">Tahoma</a></li>
+                <li><a id="dropdownFontStyleCalibri" class="dropdown-item" href="#">Calibri</a></li>
+            </ul>
+        </div>
         <script src="popup.js"></script>
     </body>
 </html>
