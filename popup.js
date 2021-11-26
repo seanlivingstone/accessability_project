@@ -14,6 +14,11 @@ let dropdownFontColor = document.getElementById("dropdownFontColor");
 let spacing = document.getElementById("customspacingsubmit");
 let dropdownFontReset = document.getElementById("dropdownFontReset");
 
+let fontStyle = document.getElementById("fontStyle");
+let dropdownFontStyleArial = document.getElementById("dropdownFontStyleArial");
+let dropdownFontStyleTahoma = document.getElementById("dropdownFontStyleTahoma");
+let dropdownFontStyleCalibri = document.getElementById("dropdownFontStyleCalibri");
+
 // chrome.storage.sync.get("color", ({ color }) => {
 //     changeColor.style.backgroundColor = color;
 // });
@@ -99,13 +104,33 @@ function setPageBackgroundColor(color) {
     }
 }
 
-dropdownChangeFontStyle.addEventListener("click", async () => {
+dropdownFontStyleArial.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
     chrome.scripting.executeScript({
         target: { tabId: tab.id },
         function: changeFontStyle,
         args: [font = 'Arial']
+    });
+})
+
+dropdownFontStyleTahoma.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontStyle,
+        args: [font = 'Tahoma']
+    });
+})
+
+dropdownFontStyleCalibri.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontStyle,
+        args: [font = 'Calibri']
     });
 })
 
@@ -152,16 +177,16 @@ dropdownChangeFontSize.addEventListener("click", async () => {
     });
 })
 
-spacing.addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    let spacing = (document.getElementById("customspacing").value;//(parseFloat(document.getElementById("customspacing").value) / 16 + 0.4)+"em"
+// spacing.addEventListener("click", async () => {
+//     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+//     let spacing = (document.getElementById("customspacing").value //(parseFloat(document.getElementById("customspacing").value) / 16 + 0.4)+"em"
 
-    chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        function: changeSpcing,
-        args: [space = spacing],
-    });
-})
+//     chrome.scripting.executeScript({
+//         target: { tabId: tab.id },
+//         function: changeSpcing,
+//         args: [space = spacing],
+//     });
+// })
 
 function changeFontStyle(font){
     document.body.style.fontFamily = font;

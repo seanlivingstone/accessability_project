@@ -52,7 +52,9 @@
                 Change Font
             </button>
             <ul id="dropdownFont" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a id="dropdownChangeFontStyle" class="dropdown-item" href="#">Change Font Style</a></li>
+                <li>
+                    <a id="dropdownChangeFontStyle" class="dropdown-item" href="#">Change Font Style</a>
+                </li>
                 <li><a id="dropdownChangeFontSize" class="dropdown-item" href="#">
                     <form>
                         <div class="row g-3 align-items-center">
@@ -85,6 +87,17 @@
                     </form>
                 </li>
                 <li><a id="dropdownFontReset" class="dropdown-item" href="#">Reset</a></li>
+            </ul>
+        </div>
+        <div class="dropdown">
+            <button id="changeFont" class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Font Style
+            </button>
+            <ul id="dropdownFont" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a id="dropdownFontStyleArial" class="dropdown-item" href="#">Arial</a></li>
+                <li><a id="dropdownFontStyleTahoma" class="dropdown-item" href="#">Tahoma</a></li>
+                <li><a id="dropdownFontStyleCalibri" class="dropdown-item" href="#">Calibri</a></li>
             </ul>
         </div>
         <script src="popup.js"></script>

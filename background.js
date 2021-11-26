@@ -30,7 +30,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
             //     console.log(result.originalbackgroundcolor);
             // })
         });
-
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
             function: getFontStyle,
