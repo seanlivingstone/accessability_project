@@ -21,7 +21,6 @@ let dropdownFontStyleTahoma = document.getElementById("dropdownFontStyleTahoma")
 let dropdownFontStyleCalibri = document.getElementById("dropdownFontStyleCalibri");
 
 // Initialize font color buttons
-// let fontColor = document.getElementById("fontColor");
 let dropdownFontColorBlack = document.getElementById("dropdownFontColorBlack");
 let dropdownFontColorWhite = document.getElementById("dropdownFontColorWhite");
 let dropdownFontColorCustom = document.getElementById("dropdownFontColorCustom");
@@ -226,16 +225,16 @@ dropdownChangeFontSize.addEventListener("click", async () => {
     });
 })
 
-// spacing.addEventListener("click", async () => {
-//     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-//     let spacing = (document.getElementById("customspacing").value //(parseFloat(document.getElementById("customspacing").value) / 16 + 0.4)+"em"
+spacing.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let fontSpacing = document.getElementById("customspacing").value + "em"; //(parseFloat(document.getElementById("customspacing").value) / 16 + 0.4)+"em"
 
-//     chrome.scripting.executeScript({
-//         target: { tabId: tab.id },
-//         function: changeSpcing,
-//         args: [space = spacing],
-//     });
-// })
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeSpacing,
+        args: [space = fontSpacing],
+    });
+})
 
 function changeFontColor(color) {
     document.body.style.fontColor = color;
