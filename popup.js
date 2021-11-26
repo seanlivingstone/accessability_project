@@ -3,7 +3,7 @@ let changeColor = document.getElementById("changeColor");   //changeColor is the
 let dropdownColorWhite = document.getElementById("dropdownColorWhite");
 let dropdownColorOffWhite = document.getElementById("dropdownColorOffWhite");
 let dropdownColorBlack = document.getElementById("dropdownColorBlack");
-let dropdownColorCustom = document.getElementById("dropdownColorCustome");
+let dropdownColorCustom = document.getElementById("custombgsubmit");
 let dropdownColorReset = document.getElementById("dropdownColorReset");
 
 // chrome.storage.sync.get("color", ({ color }) => {
@@ -66,6 +66,18 @@ dropdownColorReset.addEventListener("click", async () => {
     });
 })
 
+dropdownColorCustom.addEventListener("click", async ()=>{
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    let bgcolor = document.getElementById("custombgcolor").value;
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: setPageBackgroundColor,
+        args: [color = bgcolor],
+    });
+})
+
 // The body of this function will be executed as a content script inside the
 // current page
 function setPageBackgroundColor(color) {
@@ -73,6 +85,10 @@ function setPageBackgroundColor(color) {
     //     document.body.style.backgroundColor = color;
     // });
     document.body.style.backgroundColor = color;
+    let paragraphs = document.getElementsByTagName("p");
+    for (elt of paragraphs) {
+        elt.style['background-color'] = color;
+    }
 }
 
 //function to save previous background color
