@@ -9,7 +9,7 @@ let dropdownColorReset = document.getElementById("dropdownColorReset");
 //Initialize button for font manipulation
 let changeFont = document.getElementById("changeFont");   //changeFont is the button element
 let dropdownChangeFontStyle = document.getElementById("dropdownChangeFontStyle");
-let dropdownChangeFontSize = document.getElementById("dropdownChangeFontSize");
+let dropdownChangeFontSize = document.getElementById("customfontsizesubmit");
 let dropdownFontColor = document.getElementById("dropdownFontColor");
 let dropdownFontReset = document.getElementById("dropdownFontReset");
 
@@ -111,8 +111,12 @@ dropdownChangeFontStyle.addEventListener("click", async () => {
 dropdownFontReset.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     let fontStyle = "";
+    let fontSize = "";
     chrome.storage.sync.get("originalfontstyle", (result) => {
         fontstyle = result.originalfontstyle;
+    })
+    chrome.storage.sync.get("originalfontsize", (result) => {
+        fontSize = result.originalfontsize;
     })
 
     chrome.scripting.executeScript({
@@ -120,16 +124,33 @@ dropdownFontReset.addEventListener("click", async () => {
         function: changeFontStyle,
         args: [font = fontStyle],
     });
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontSize,
+        args: [size = fontSize],
+    });
 })
 
-//recursively changes font style for each element in body (according to stack overflow)
+dropdownChangeFontSize.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let fontSize = document.getElementById("customfontsize").value+"px";
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontSize,
+        args: [size = fontSize],
+    });
+})
+
+
 function changeFontStyle(font){
-    // element.setAttribute("style",element.getAttribute("style")+";font-family: Courier New");
-    // for(var i=0; i < element.children.length; i++){
-    //     changeFontStyle(element.children[i]);
-    // }
-    document.body.style.fontFamily=font;
+    document.body.style.fontFamily = font;
 }
+
+function changeFontSize(size){
+    document.body.style.fontSize = size;
+}
+
 //function to save previous background color
 // function getPageBackgroundColor() {
 //     return document.body.style.backgroundColor;

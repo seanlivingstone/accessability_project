@@ -30,16 +30,22 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
             //     console.log(result.originalbackgroundcolor);
             // })
         });
+
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
             function: getFontStyle,
         },
         (results) => {
-            console.log(results[0].result);
+        	console.log(results[0].result);
             chrome.storage.sync.set({"originalfontStyle": results[0].result});
-            // chrome.storage.sync.get("originalbackgroundcolor", (result) => {
-            //     console.log(result.originalbackgroundcolor);
-            // })
+        });
+
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: getFontSize,
+        },
+        (results) => {
+            chrome.storage.sync.set({"originalfontsize": results[0].result});
         });
     }
 });
@@ -61,4 +67,10 @@ function getPageBackgroundColor() {
 function getFontStyle(){
 	let fontstyle = window.getComputedStyle(document, null).getPropertyValue('font-style');
     return fontstyle;
+}
+
+//function to save previous font size
+function getFontSize(){
+	let fontsize = window.getComputedStyle(document, null).getPropertyValue('fontSize');
+    return fontsize;
 }
