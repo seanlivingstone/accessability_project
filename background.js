@@ -4,7 +4,7 @@ let color = '#ffffff';
 
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.set({ color });
-    //console.log('Default background color set to %cgreen', `color: ${color}`);
+    // console.log('Default background color set to %cgreen', `color: ${color}`);
 });
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
@@ -30,7 +30,6 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
             //     console.log(result.originalbackgroundcolor);
             // })
         });
-
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
             function: getFontStyle,
