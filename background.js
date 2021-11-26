@@ -47,6 +47,15 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
         (results) => {
             chrome.storage.sync.set({"originalfontsize": results[0].result});
         });
+
+        chrome.scripting.executeScript({
+            target: { tabId: tab.id },
+            function: getSpacing,
+        },
+        (results) => {
+            chrome.storage.sync.set({"originalspacing": results[0].result});
+            console.log(results[0].result);
+        });
     }
 });
 
@@ -73,4 +82,10 @@ function getFontStyle(){
 function getFontSize(){
 	let fontsize = window.getComputedStyle(document, null).getPropertyValue('fontSize');
     return fontsize;
+}
+
+//function to save previous spacing
+function getSpacing(){
+	let spacing = window.getComputedStyle(document, null).getPropertyValue('lineHeight');
+    return spacing;
 }

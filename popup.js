@@ -11,6 +11,7 @@ let changeFont = document.getElementById("changeFont");   //changeFont is the bu
 let dropdownChangeFontStyle = document.getElementById("dropdownChangeFontStyle");
 let dropdownChangeFontSize = document.getElementById("customfontsizesubmit");
 let dropdownFontColor = document.getElementById("dropdownFontColor");
+let spacing = document.getElementById("customspacingsubmit");
 let dropdownFontReset = document.getElementById("dropdownFontReset");
 
 // chrome.storage.sync.get("color", ({ color }) => {
@@ -112,11 +113,15 @@ dropdownFontReset.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     let fontStyle = "";
     let fontSize = "";
+    let spacing = "";
     chrome.storage.sync.get("originalfontstyle", (result) => {
         fontstyle = result.originalfontstyle;
     })
     chrome.storage.sync.get("originalfontsize", (result) => {
         fontSize = result.originalfontsize;
+    })
+    chrome.storage.sync.get("originalspacing", (result) => {
+        spacing = result.originalspacing;
     })
 
     chrome.scripting.executeScript({
@@ -128,6 +133,11 @@ dropdownFontReset.addEventListener("click", async () => {
         target: { tabId: tab.id },
         function: changeFontSize,
         args: [size = fontSize],
+    });
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeSpacing,
+        args: [space = spacing],
     });
 })
 
@@ -142,6 +152,16 @@ dropdownChangeFontSize.addEventListener("click", async () => {
     });
 })
 
+spacing.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    let spacing = (document.getElementById("customspacing").value;//(parseFloat(document.getElementById("customspacing").value) / 16 + 0.4)+"em"
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeSpcing,
+        args: [space = spacing],
+    });
+})
 
 function changeFontStyle(font){
     document.body.style.fontFamily = font;
@@ -149,6 +169,14 @@ function changeFontStyle(font){
 
 function changeFontSize(size){
     document.body.style.fontSize = size;
+}
+
+function changeSpacing(space){
+    document.body.style.lineHeight = space;
+    let paragraphs = document.getElementsByTagName("p");
+    for (elt of paragraphs) {
+        elt.style['line-height'] = space;
+    }
 }
 
 //function to save previous background color
