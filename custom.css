@@ -7,3 +7,47 @@
 {
     min-width: 100px;
 }
+
+.submenu {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.submenu-btn {
+    background-color: #fff;
+    color: black;
+    border: none;
+    text-align: left;
+    margin-left: 8px;
+    border-radius: 4px;
+}
+
+.submenu-content {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.1);
+    z-index: 1;
+}
+
+.submenu-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+.submenu-content a:hover {
+    background-color: #ddd;
+}
+
+.submenu:hover .submenu-content {
+    display: inline-block;
+    position: right;
+}
+
+.submenu:hover .submenu-btn {
+    background-color: #e9ecef;
+}
