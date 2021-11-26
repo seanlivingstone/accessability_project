@@ -14,10 +14,18 @@ let dropdownFontColor = document.getElementById("dropdownFontColor");
 let spacing = document.getElementById("customspacingsubmit");
 let dropdownFontReset = document.getElementById("dropdownFontReset");
 
+// Initialize font style buttons
 let fontStyle = document.getElementById("fontStyle");
 let dropdownFontStyleArial = document.getElementById("dropdownFontStyleArial");
 let dropdownFontStyleTahoma = document.getElementById("dropdownFontStyleTahoma");
 let dropdownFontStyleCalibri = document.getElementById("dropdownFontStyleCalibri");
+
+// Initialize font color buttons
+// let fontColor = document.getElementById("fontColor");
+let dropdownFontColorBlack = document.getElementById("dropdownFontColorBlack");
+let dropdownFontColorWhite = document.getElementById("dropdownFontColorWhite");
+let dropdownFontColorCustom = document.getElementById("dropdownFontColorCustom");
+let dropdownFontColorSubmit = document.getElementById("customFontColotSubmit");
 
 // chrome.storage.sync.get("color", ({ color }) => {
 //     changeColor.style.backgroundColor = color;
@@ -134,11 +142,44 @@ dropdownFontStyleCalibri.addEventListener("click", async () => {
     });
 })
 
+dropdownFontColorBlack.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontColor,
+        args: [color = '#000']
+    });
+})
+
+dropdownFontColorWhite.addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontColor,
+        args: [color = '#fff']
+    });
+})
+
+dropdownFontColorCustom.addEventListener("click", async ()=>{
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    let fontColor = document.getElementById("customFontColor").value;
+
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontColor,
+        args: [color = fontColor],
+    });
+})
+
 dropdownFontReset.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     let fontStyle = "";
     let fontSize = "";
     let spacing = "";
+    let fontColor = "";
     chrome.storage.sync.get("originalfontstyle", (result) => {
         fontstyle = result.originalfontstyle;
     })
@@ -147,6 +188,9 @@ dropdownFontReset.addEventListener("click", async () => {
     })
     chrome.storage.sync.get("originalspacing", (result) => {
         spacing = result.originalspacing;
+    })
+    chrome.storage.sync.get("originalfontcolor", (result) => {
+        fontColor = result.originalfontcolor;
     })
 
     chrome.scripting.executeScript({
@@ -163,6 +207,11 @@ dropdownFontReset.addEventListener("click", async () => {
         target: { tabId: tab.id },
         function: changeSpacing,
         args: [space = spacing],
+    });
+    chrome.scripting.executeScript({
+        target: { tabId: tab.id },
+        function: changeFontColor,
+        args: [color = fontColor],
     });
 })
 
@@ -187,6 +236,20 @@ dropdownChangeFontSize.addEventListener("click", async () => {
 //         args: [space = spacing],
 //     });
 // })
+
+function changeFontColor(color) {
+    document.body.style.fontColor = color;
+
+    let paragraphs = document.getElementsByTagName("p");
+    for (elt of paragraphs) {
+        elt.style['color'] = color;
+    }
+
+    let hyperlink = document.getElementsByTagName("a");
+    for (each of hyperlink) {
+        each.style['color'] = color;
+    }
+}
 
 function changeFontStyle(font){
     document.body.style.fontFamily = font;
