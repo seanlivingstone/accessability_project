@@ -11,6 +11,13 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     if(changeInfo.status == "complete")    //check to see if tab has completed loading
     {
         let [tab] = await chrome.tabs.query({ active: true, currentWindow: true }); //grab current tab
+        const chromeurl = new RegExp('chrome://*');
+        const chromeexturl = new RegExp('chrome-extension://*')
+        if(chromeurl.test(tab.url) || chromeexturl.test(tab.url))
+        {
+            console.log("Chrome URL Detected. Will not load content script.");
+            return;
+        }
         // console.log(tab);
         chrome.scripting.executeScript({
             target: { tabId: tab.id },
