@@ -42,6 +42,7 @@ let dropdownFontColorSubmit = document.getElementById("customFontColotSubmit");
     // });
 // });
 
+
 dropdownColorBlack.addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
 
