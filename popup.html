@@ -15,6 +15,7 @@
 
     <body>
         <!-- <button id="changeColor"></button> -->
+        <!-- <div class="extension-wrapper"> -->
         <div class="dropdown">
             <button id="changeColor" class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                 aria-expanded="false">
@@ -34,7 +35,7 @@
                                 <input type="color" id="custombgcolor" class="form-control form-control-color" aria-describedby="colorhelpinline">
                             </div>
                             <div class="col-auto">
-                                <button type="submit" id="custombgsubmit" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="custombgsubmit" class="btn btn-primary">Apply</button>
                             </div>
                         </div>
                     </form>
@@ -42,16 +43,12 @@
                 <li><a id="dropdownColorReset" class="dropdown-item" href="#">Reset</a></li>
             </ul>
         </div>
-        <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Reader Mode</label>
-        </div>
         <div class="dropdown">
             <button id="changeFont" class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                 aria-expanded="false">
                 Change Font
             </button>
-            <ul id="dropdownFont" class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <ul id="dropdownFont" class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton1">
                 <li>
                     <div class="submenu">
                         <button class="submenu-btn">Font Style &raquo</button>
@@ -70,9 +67,17 @@
                             <a id="dropdownFontColorWhite" class="dropdown-item" href="#">White</a>
                             <a id="dropdownFontColorCustom" class="dropdown-item-text">
                                 <form>
-                                    <label for="customFontColor" class="col-form-label">Custom</label>
-                                    <input type="color" id="customFontColor" class="form-control form-control-color" aria-describedby="colorhelpinline">
-                                    <button type="submit" id="customFontColorSubmit" class="btn btn-primary">Submit</button>
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-auto">
+                                            <label for="customFontColor" class="col-form-label">Custom</label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input type="color" id="customFontColor" class="form-control form-control-color" style="width:50px" aria-describedby="colorhelpinline">
+                                        </div>
+                                        <div class="col-auto">
+                                            <button type="submit" id="customFontColorSubmit" class="btn btn-primary">Apply</button>
+                                        </div>
+                                    </div>
                                 </form>
                             </a>
                         </div>
@@ -88,7 +93,7 @@
                                 <input type="text" id="customfontsize" size="2">
                             </div>
                             <div class="col-auto">
-                                <button type="submit" id="customfontsizesubmit" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="customfontsizesubmit" class="btn btn-primary">Apply</button>
                             </div>
                         </div>
                     </form>
@@ -97,13 +102,13 @@
                     <form>
                         <div class="row g-3 align-items-center">
                             <div class="col-auto">
-                                <label for="customspacing" class="col-form-label">Change Spacing (eg. 16)</label>
+                                <label for="customspacing" class="col-form-label">Change Spacing (eg. 2)</label>
                             </div>
                             <div class="col-auto">
                                 <input type="text" id="customspacing" size="2">
                             </div>
                             <div class="col-auto">
-                                <button type="submit" id="customspacingsubmit" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="customspacingsubmit" class="btn btn-primary">Apply</button>
                             </div>
                         </div>
                     </form>
@@ -111,9 +116,14 @@
                 <li><a id="dropdownFontReset" class="dropdown-item" href="#">Reset</a></li>
             </ul>
         </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Reader Mode</label>
+        </div>
         <div style="text-align:center"> 
             <a href="https://forms.gle/JReWGRF5ivYTFbct6" target="_blank">Send Feedback</a>
         </div>
+        <!-- </div> -->
         <script src="popup.js"></script>
     </body>
 </html>
